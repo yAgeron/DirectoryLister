@@ -30,6 +30,7 @@ deploy:
   provider: releases
   api_key: ${GITHUB_TOKEN}
   name: v${TRAVIS_TAG}
+  target_commitish: ${TRAVIS_TAG}
   draft: true
   file:
     - artifacts/DirectoryLister-${TRAVIS_TAG}.tar.gz
