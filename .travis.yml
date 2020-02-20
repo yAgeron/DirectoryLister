@@ -21,3 +21,16 @@ script:
   - app/vendor/bin/php-cs-fixer fix --diff --dry-run
   - app/vendor/bin/psalm
   - app/vendor/bin/phpunit --coverage-text
+
+before_deploy: make artifacts
+
+deploy:
+  on:
+    tags: true
+  provider: releases
+  api_key: ${GITHUB_TOKEN}
+  draft: true
+  file:
+    - artifacts/DirectoryLister-${TRAVIS_TAG}.tar.gz
+    - artifacts/DirectoryLister-${TRAVIS_TAG}.zip
+  skip_cleanup: true
